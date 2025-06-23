@@ -1,9 +1,7 @@
 package com.callog.callog_user_status.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -13,6 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 @Table(name = "weight_info", uniqueConstraints = @UniqueConstraint(
         name="uq_user_date", columnNames = {"userId","weightDate"}))
 public class WeightInfo {
