@@ -2,7 +2,6 @@ package com.callog.callog_user_status.repository;
 
 import com.callog.callog_user_status.domain.WeightInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
