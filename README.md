@@ -1,2 +1,0 @@
-# Callog_Back_user_status
-Callog_Back_user_status 회원통계
