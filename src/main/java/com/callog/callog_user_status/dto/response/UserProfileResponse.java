@@ -2,27 +2,25 @@ package com.callog.callog_user_status.dto.response;
 
 import com.callog.callog_user_status.common.Gender;
 import com.callog.callog_user_status.domain.UserStatus;
-import lombok.Builder;
+import lombok.*;
 
-import java.time.LocalDateTime;
 
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-public record UserProfileResponse(
-        Long height,
-        Long weight,
-        Long age,
-        Gender gender,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
-) {
-    public static UserProfileResponse of(UserStatus s) {
-        return new UserProfileResponse(
-                s.getHeight(),
-                s.getWeight(),
-                s.getAge(),
-                s.getGender(),
-                s.getCreateAt(),
-                s.getUpdatedAt()
-        );
+public class UserProfileResponse {
+    private Long   height;
+    private Long   weight;
+    private Long   age;
+    private Gender gender;
+
+    public static UserProfileResponse of(UserStatus e) {
+        return UserProfileResponse.builder()
+                .height(e.getHeight())
+                .weight(e.getWeight())
+                .age(e.getAge())
+                .gender(e.getGender())
+                .build();
     }
 }
