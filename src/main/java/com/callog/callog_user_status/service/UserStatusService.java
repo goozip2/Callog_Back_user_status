@@ -18,7 +18,7 @@ public class UserStatusService {
     private final UserStatusRepository repo;
 
     @Transactional
-    public UserProfileResponse upsert(String userId, @Valid UserProfileRequest req) {
+    public UserProfileResponse upsert(Long userId, @Valid UserProfileRequest req) {
         //log.debug("[UserStatus] upsert userId={} payload={}", userId, req);
 
         UserStatus entity = repo.findByUserId(userId).orElseGet(() -> req.toEntity(userId));
@@ -32,14 +32,14 @@ public class UserStatusService {
     }
 
     @Transactional(readOnly = true)
-    public UserProfileResponse get(String userId) {
+    public UserProfileResponse get(Long userId) {
         UserStatus entity = repo.findByUserId(userId)
                 .orElseThrow(() -> new StatNotFoundException("User profile not found: " + userId));
         return UserProfileResponse.of(entity);
     }
 
     @Transactional
-    public UserProfileResponse patchHeightWeight(String userId, Long height, Long weight) {
+    public UserProfileResponse patchHeightWeight(Long userId, Long height, Long weight) {
         UserStatus entity = repo.findByUserId(userId)
                 .orElseThrow(() -> new StatNotFoundException("User profile not found: " + userId));
         if (height != null) entity.setHeight(height);

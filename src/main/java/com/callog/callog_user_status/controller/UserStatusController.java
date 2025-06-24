@@ -13,28 +13,27 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @Validated
-//@RequestMapping("/api/v1/userStatus")
 public class UserStatusController {
 
     private final UserStatusService statusSvc;
 
     // api
     @GetMapping("/user/info/{userId}")
-    public ApiResponseDto<UserProfileResponse> getUserStats(@PathVariable String userId) {
+    public ApiResponseDto<UserProfileResponse> getUserStats(@PathVariable Long userId) {
         return ApiResponseDto.createOk(statusSvc.get(userId));
     }
 
     // 등록
     @PostMapping("/userStatus")
     public ApiResponseDto<UserProfileResponse> upsertProfile(
-            @RequestHeader("X-USER-ID") String userId,
+            @RequestHeader("X-USER-ID") Long userId,
             @Valid @RequestBody UserProfileRequest req) {
         return ApiResponseDto.createOk(statusSvc.upsert(userId, req));
     }
 
     // 프로필 조회
     @GetMapping("/userStatus/{userId}")
-    public ApiResponseDto<UserProfileResponse> getProfile(@RequestHeader("X-USER-ID") String userId) {
+    public ApiResponseDto<UserProfileResponse> getProfile(@RequestHeader("X-USER-ID") Long userId) {
         return ApiResponseDto.createOk(statusSvc.get(userId));
     }
 }

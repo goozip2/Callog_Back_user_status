@@ -14,7 +14,6 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Validated
-//@RequestMapping("/api/v1/userStatus")
 public class WeightController {
 
     private final WeightService weightSvc;
@@ -22,7 +21,7 @@ public class WeightController {
     // 키·몸무게만 부분 수정
     @PostMapping("/userStatus/{userId}")
     public ApiResponseDto<WeightResponse> recordWeight(
-            @RequestHeader("X-USER-ID") String userId,
+            @RequestHeader("X-USER-ID") Long userId,
             @Valid @RequestBody WeightRecordRequest req) {
         return ApiResponseDto.createOk(weightSvc.record(userId, req));
     }
@@ -30,7 +29,7 @@ public class WeightController {
     // 최근 7일 몸무게 리스트
     @GetMapping("/userStatus/weights")
     public ApiResponseDto<List<WeightResponse>> latestWeights(
-            @RequestHeader("X-USER-ID") String userId,
+            @RequestHeader("X-USER-ID") Long userId,
             @RequestParam(defaultValue = "7") int days) {
         return ApiResponseDto.createOk(weightSvc.latest(userId, days));
     }

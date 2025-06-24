@@ -16,7 +16,7 @@ public class WeightRecordRequest {
     @NotNull @Positive private Long weight;
     @Positive private Long height;           // null 허용 → 키 변경 없이 몸무게만 기록할 때
 
-    public WeightInfo toEntity(String userId, LocalDate date) {
+    public WeightInfo toEntity(Long userId, LocalDate date) {
         return WeightInfo.builder()
                 .userId(userId)
                 .weightDate(date)

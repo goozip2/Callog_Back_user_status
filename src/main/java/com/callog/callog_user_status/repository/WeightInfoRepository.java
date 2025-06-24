@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WeightInfoRepository extends JpaRepository<WeightInfo, Long> {
-    List<WeightInfo> findTop7ByUserIdOrderByWeightDateDesc(String userId);
-    Optional<WeightInfo> findByUserIdAndWeightDate(String userId, LocalDate date);
+    List<WeightInfo> findTop7ByUserIdOrderByWeightDateDesc(Long userId);
+    Optional<WeightInfo> findByUserIdAndWeightDate(Long userId, LocalDate date);
 }

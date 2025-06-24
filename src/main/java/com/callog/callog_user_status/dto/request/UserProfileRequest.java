@@ -24,7 +24,7 @@ public class UserProfileRequest {
     @NotNull
     private Gender gender;
 
-    public UserStatus toEntity(String userId) {
+    public UserStatus toEntity(Long userId) {
         return UserStatus.builder()
                 .userId(userId)
                 .height(height)

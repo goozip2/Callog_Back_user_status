@@ -19,8 +19,8 @@ public class UserStatus {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long statsId;
 
-    @Column(nullable = false, length = 100)
-    private String userId;
+    @Column(nullable = false)
+    private Long userId;
 
     private Long height;
     private Long weight;
