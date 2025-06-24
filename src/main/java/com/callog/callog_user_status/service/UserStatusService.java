@@ -19,13 +19,13 @@ public class UserStatusService {
 
     @Transactional
     public UserProfileResponse upsert(String userId, @Valid UserProfileRequest req) {
-        log.debug("[UserStatus] upsert userId={} payload={}", userId, req);
+        //log.debug("[UserStatus] upsert userId={} payload={}", userId, req);
 
         UserStatus entity = repo.findByUserId(userId).orElseGet(() -> req.toEntity(userId));
-        entity.setHeight(req.height());
-        entity.setWeight(req.weight());
-        entity.setAge(req.age());
-        entity.setGender(req.gender());
+        entity.setHeight(req.getHeight());
+        entity.setWeight(req.getWeight());
+        entity.setAge(req.getAge());
+        entity.setGender(req.getGender());
 
         repo.save(entity);
         return UserProfileResponse.of(entity);
