@@ -1,3 +1,3 @@
 spring:
   application:
-    name: callog_user_status
+    name: callog-user-status
