@@ -24,13 +24,11 @@ import java.util.Optional;
 public class WeightService {
     private final WeightInfoRepository repo;
     private final UserStatusRepository profileRepo;
-    //private final WeightEventProducer producer;
 
     // 하루 몸무게 기록 – 존재하면 업데이트, 없으면 신규 INSERT
     @Transactional
     public WeightResponse record(Long userId, @Valid WeightRecordRequest req) {
         LocalDate today = LocalDate.now();
-        //log.debug("[Weight] record userId={} date={} payload={}", userId, today, req);
 
         WeightInfo entity = repo.findByUserIdAndWeightDate(userId, today)
                 .orElseGet(() -> req.toEntity(userId, today));
@@ -52,11 +50,6 @@ public class WeightService {
         profile.setWeight(req.getWeight());
         if (req.getHeight() != null) profile.setHeight(req.getHeight());
         profileRepo.save(profile);
-
-        // Kafka 이벤트 발행
-//        WeightEvent event = new WeightEvent(userId, today, req.getWeight(),
-//                Optional.ofNullable(req.getHeight()).orElse(profile.getHeight()));
-//        producer.publish(event);
 
         return WeightResponse.of(entity);
     }
