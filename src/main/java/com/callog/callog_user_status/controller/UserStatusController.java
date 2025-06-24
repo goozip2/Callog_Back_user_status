@@ -17,18 +17,19 @@ public class UserStatusController {
 
     private final UserStatusService statusSvc;
 
-    // api
-    @GetMapping("/user/info/{userId}")
-    public ApiResponseDto<UserProfileResponse> getUserStats(@PathVariable Long userId) {
-        return ApiResponseDto.createOk(statusSvc.get(userId));
+    // 로그인 시 사용하는 backend API
+    @GetMapping("/backend/userStatus/login/{userId}")
+    public UserProfileResponse getUserStats(@PathVariable Long userId) {
+        return statusSvc.get(userId);
     }
 
-    // 등록
-    @PostMapping("/userStatus")
-    public ApiResponseDto<UserProfileResponse> upsertProfile(
-            @RequestHeader("X-USER-ID") Long userId,
+    // 회원가입 시 사용하는 backend API
+    @PostMapping("/backend/userStatus/register")
+    public UserProfileResponse upsertProfile(
+//            @RequestHeader("X-USER-ID") Long userId,
+            @RequestParam Long userId,
             @Valid @RequestBody UserProfileRequest req) {
-        return ApiResponseDto.createOk(statusSvc.upsert(userId, req));
+        return statusSvc.upsert(userId, req);
     }
 
     // 프로필 조회
