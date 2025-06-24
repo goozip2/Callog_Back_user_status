@@ -6,7 +6,7 @@ spring:
     config:
       enabled: false
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/user_status?serverTimezone=UTC&useSSL=true&autoReconnect=true&useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/user_status?serverTimezone=Asia/Seoul&useSSL=true&autoReconnect=true&useUnicode=true&characterEncoding=utf-8
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
