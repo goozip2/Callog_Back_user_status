@@ -6,10 +6,12 @@ import com.callog.callog_user_status.dto.response.UserProfileResponse;
 import com.callog.callog_user_status.service.UserStatusService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @Validated
@@ -20,6 +22,7 @@ public class UserStatusController {
     // 로그인 시 사용하는 backend API
     @GetMapping("/backend/userStatus/login/{userId}")
     public UserProfileResponse getUserStats(@PathVariable Long userId) {
+        log.info("[user 로그인]: height, weight, age, gender 전달");
         return statusSvc.get(userId);
     }
 
@@ -29,6 +32,7 @@ public class UserStatusController {
 //            @RequestHeader("X-USER-ID") Long userId,
             @RequestParam Long userId,
             @Valid @RequestBody UserProfileRequest req) {
+        log.info("[user 회원가입]: height, weight, age, gender 저장");
         return statusSvc.upsert(userId, req);
     }
 
