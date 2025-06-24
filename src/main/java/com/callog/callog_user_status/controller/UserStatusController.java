@@ -18,6 +18,12 @@ public class UserStatusController {
 
     private final UserStatusService statusSvc;
 
+    // api
+    @GetMapping("/user/info/{userId}")
+    public ApiResponseDto<UserProfileResponse> getUserStats(@PathVariable String userId) {
+        return ApiResponseDto.createOk(statusSvc.get(userId));
+    }
+
     // 등록
     @PostMapping("/userStatus")
     public ApiResponseDto<UserProfileResponse> upsertProfile(
