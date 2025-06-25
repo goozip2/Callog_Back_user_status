@@ -19,9 +19,9 @@ public class WeightController {
     private final WeightService weightSvc;
 
     // 키·몸무게만 부분 수정
-    @PostMapping("/userStatus/{userId}")
+    @PostMapping("/userStatus/update")
     public ApiResponseDto<WeightResponse> recordWeight(
-            @RequestHeader("X-USER-ID") Long userId,
+            @RequestHeader("X-Auth-User-Id") Long userId,
             @Valid @RequestBody WeightRecordRequest req) {
         return ApiResponseDto.createOk(weightSvc.record(userId, req));
     }
@@ -29,9 +29,8 @@ public class WeightController {
     // 최근 7일 몸무게 리스트
     @GetMapping("/userStatus/weights")
     public ApiResponseDto<List<WeightResponse>> latestWeights(
-            @RequestHeader("X-USER-ID") Long userId,
-            @RequestParam(defaultValue = "7") int days) {
-        return ApiResponseDto.createOk(weightSvc.latest(userId, days));
+            @RequestHeader("X-Auth-User-Id") Long userId) {
+        return ApiResponseDto.createOk(weightSvc.latest(userId));
     }
 }
 

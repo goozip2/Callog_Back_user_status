@@ -29,7 +29,7 @@ public class UserStatusController {
     // 회원가입 시 사용하는 backend API
     @PostMapping("/backend/userStatus/register")
     public UserProfileResponse upsertProfile(
-//            @RequestHeader("X-USER-ID") Long userId,
+//            @RequestHeader("X-Auth-User-Id") Long userId,
             @RequestParam Long userId,
             @Valid @RequestBody UserProfileRequest req) {
         log.info("[user 회원가입]: height, weight, age, gender 저장");
@@ -37,8 +37,8 @@ public class UserStatusController {
     }
 
     // 프로필 조회
-    @GetMapping("/userStatus/{userId}")
-    public ApiResponseDto<UserProfileResponse> getProfile(@RequestHeader("X-USER-ID") Long userId) {
+    @GetMapping("/userStatus")
+    public ApiResponseDto<UserProfileResponse> getProfile(@RequestHeader("X-Auth-User-Id") Long userId) {
         return ApiResponseDto.createOk(statusSvc.get(userId));
     }
 }

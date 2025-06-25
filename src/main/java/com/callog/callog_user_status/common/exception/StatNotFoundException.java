@@ -1,7 +1,8 @@
 package com.callog.callog_user_status.common.exception;
 
-public class StatNotFoundException extends RuntimeException {
+public class StatNotFoundException extends ClientError {
     public StatNotFoundException(String message) {
-        super(message);
+        this.errorCode = "StatNotFound";
+        this.errorMessage = message;
     }
 }

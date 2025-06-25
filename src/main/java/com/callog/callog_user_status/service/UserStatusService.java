@@ -18,7 +18,7 @@ public class UserStatusService {
     private final UserStatusRepository repo;
 
     @Transactional
-    public UserProfileResponse upsert(Long userId, @Valid UserProfileRequest req) {
+    public UserProfileResponse upsert(Long userId, UserProfileRequest req) {
         //log.debug("[UserStatus] upsert userId={} payload={}", userId, req);
 
         UserStatus entity = repo.findByUserId(userId).orElseGet(() -> req.toEntity(userId));

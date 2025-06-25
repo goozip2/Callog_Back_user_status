@@ -27,7 +27,7 @@ public class WeightService {
 
     // 하루 몸무게 기록 – 존재하면 업데이트, 없으면 신규 INSERT
     @Transactional
-    public WeightResponse record(Long userId, @Valid WeightRecordRequest req) {
+    public WeightResponse record(Long userId, WeightRecordRequest req) {
         LocalDate today = LocalDate.now();
 
         WeightInfo entity = repo.findByUserIdAndWeightDate(userId, today)
@@ -55,8 +55,7 @@ public class WeightService {
     }
 
     @Transactional(readOnly = true)
-    public List<WeightResponse> latest(Long userId, int days) {
-        if (days <= 0) days = 7;
+    public List<WeightResponse> latest(Long userId) {
         List<WeightInfo> list = repo.findTop7ByUserIdOrderByWeightDateDesc(userId);
         return list.stream().map(WeightResponse::of).toList();
     }
